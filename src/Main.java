@@ -12,12 +12,14 @@ public class Main {
 
         boolean exit = true;
         while (exit) {
-            System.out.println("Seleciona a opção");
+            System.out.println("Selecione a opção");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Buscar");
             System.out.println("3 - Remover");
             System.out.println("4 - Editar");
-            System.out.println("5 - Sair");
+            System.out.println("5 - Listar");
+            System.out.println("6 - Sexo");
+            System.out.println("7 - Sair");
             int option = scanner.nextInt();
             switch (option) {
 
@@ -40,6 +42,14 @@ public class Main {
                     break;
 
                 case 5:
+                    listStudent();
+                    break;
+
+                case 6:
+                    studentSex();
+                    break;
+
+                case 7:
                     exit = false;
                     break;
             }
@@ -50,9 +60,14 @@ public class Main {
         Person student = new Person();
         Scanner scanner = new Scanner(System.in);
 
+
         System.out.println("Digite o nome do estudante");
         student.name = scanner.next();
         students.add(student);
+        System.out.println("Digite o sexo do estudante");
+        student.sex = scanner.next().toUpperCase();
+        System.out.println("Digite a idade do estudante");
+        student.age = scanner.nextInt();
         System.out.println(student.name + "Cadastrado.");
     }
 
@@ -62,7 +77,7 @@ public class Main {
             Person student = students.get(count);
             if (student.name.equals(studentName)) {
                 position = count;
-                System.out.println("Encontrei o " + studentName);
+                System.out.println("Nome: " + studentName + " - Idade: " + student.age + " - Sexo: " + student.sex);
             }
         }
         return position;
@@ -88,6 +103,33 @@ public class Main {
             p1.name = name;
         }
     }
+
+    private static void listStudent() {
+
+        System.out.println("\nAlunos Cadastrados:");
+        for(int count = 0; count < students.size(); count++) {
+            Person student = students.get(count);
+            System.out.println("Nome: " + student.name + " - Idade: " + student.age + " - Sexo: " + student.sex);
+        }
+    }
+
+    private static void studentSex() {
+
+        var masculino = 0;
+        var feminino = 0;
+
+        for(int count = 0; count < students.size(); count++) {
+            Person student = students.get(count);
+            if (student.sex.equals("M")){
+                masculino++;
+            } else if (student.sex.equals("F")){
+                feminino++;
+            }
+        }
+        System.out.println("Total masculino: " + masculino + "\nTotal feminino: " + feminino + "\n");
+
+    }
+
 }
 
 
